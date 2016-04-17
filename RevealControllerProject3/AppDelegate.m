@@ -19,15 +19,20 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize dbClassObj;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	self.window = window;
     
+    dbClassObj = [[DBClass alloc] init];
+    [dbClassObj CreateDB];
+    
 	RearMasterTableViewController *rearViewController = [[RearMasterTableViewController alloc] init];
     //FrontViewControllerImage *frontViewController = [[FrontViewControllerImage alloc] init];
     FrontViewControllerLabel *frontViewControllerLabel = [[FrontViewControllerLabel alloc] init];
+    frontViewControllerLabel.dbClassObj = dbClassObj;
     
     SWRevealViewController *mainRevealController =
         [[SWRevealViewController alloc] initWithRearViewController:rearViewController frontViewController:frontViewControllerLabel];

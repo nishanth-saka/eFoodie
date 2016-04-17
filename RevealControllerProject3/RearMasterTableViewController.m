@@ -18,6 +18,10 @@
 @implementation RearMasterTableViewController
 {
     NSInteger _previouslySelectedRow;
+    
+    UIColor *brownColor, *brownColorSubtle;
+    UIColor *orangeColor, *orangeColorSubtle;
+    UIColor *greenColor, *greenColorSubtle;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -33,10 +37,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    brownColor = [UIColor colorWithRed:38/255.0f green:28/255.0f blue:22/255.0f alpha:1.0f];
+    brownColorSubtle  = [UIColor colorWithRed:38/255.0f green:28/255.0f blue:22/255.0f alpha:0.9f];
+    
+    greenColor = [UIColor colorWithRed:241/255.0f green:217/255.0f blue:193/255.0f alpha:1.0f];
+    greenColorSubtle = [UIColor colorWithRed:241/255.0f green:217/255.0f blue:193/255.0f alpha:0.9f];
+    
+    orangeColor = [UIColor colorWithRed:241/255.0f green:153/255.0f blue:6/255.0f alpha:1.0f];
+    orangeColorSubtle  = [UIColor colorWithRed:241/255.0f green:153/255.0f blue:6/255.0f alpha:0.9f];
+    
     self.clearsSelectionOnViewWillAppear = NO;
-    self.tableView.backgroundColor = [UIColor colorWithRed:79/255.0f green:170/255.0f blue:178/255.0f alpha:1.0f];
-    //[UIColor colorWithRed:38/255.0f green:28/255.0f blue:22/255.0f alpha:1.0f];
-    self.tableView.separatorColor = [UIColor clearColor]; //[UIColor colorWithWhite:0.5 alpha:1.0];
+    self.tableView.backgroundColor = brownColor;
+    self.tableView.separatorColor = [UIColor clearColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -72,7 +85,7 @@
     }
     
     UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = [UIColor colorWithRed:241/255.0f green:153/255.0f blue:6/255.0f alpha:1.0f];
+    bgColorView.backgroundColor = orangeColor;
     [cell setSelectedBackgroundView:bgColorView];
     cell.textLabel.font = [UIFont fontWithName:@"Verdana" size:10];
 

@@ -24,6 +24,15 @@
 		21012C601CBE2AA000566C05 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 21012C4E1CBE2AA000566C05 /* UIImageView+HighlightedWebCache.m */; };
 		21012C611CBE2AA000566C05 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 21012C501CBE2AA000566C05 /* UIImageView+WebCache.m */; };
 		21012C621CBE2AA000566C05 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21012C521CBE2AA000566C05 /* UIView+WebCacheOperation.m */; };
+		212AD3331CC3FF4800DCBD0B /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 212AD3311CC3FF3A00DCBD0B /* libsqlite3.0.tbd */; };
+		212AD3351CC3FF5400DCBD0B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 212AD3341CC3FF5400DCBD0B /* libsqlite3.tbd */; };
+		212AD3411CC3FF6800DCBD0B /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AD3381CC3FF6800DCBD0B /* FMDatabase.m */; };
+		212AD3421CC3FF6800DCBD0B /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AD33A1CC3FF6800DCBD0B /* FMDatabaseAdditions.m */; };
+		212AD3431CC3FF6800DCBD0B /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AD33C1CC3FF6800DCBD0B /* FMDatabasePool.m */; };
+		212AD3441CC3FF6800DCBD0B /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AD33E1CC3FF6800DCBD0B /* FMDatabaseQueue.m */; };
+		212AD3451CC3FF6800DCBD0B /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AD3401CC3FF6800DCBD0B /* FMResultSet.m */; };
+		212AD3491CC3FFD100DCBD0B /* DBClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AD3481CC3FFD100DCBD0B /* DBClass.m */; };
+		212AD34C1CC3FFFD00DCBD0B /* DealsObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AD34B1CC3FFFD00DCBD0B /* DealsObj.m */; };
 		213854241CBEA26F0086D163 /* DealViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 213854221CBEA26F0086D163 /* DealViewCell.m */; };
 		213854251CBEA26F0086D163 /* DealViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213854231CBEA26F0086D163 /* DealViewCell.xib */; };
 		217D770B1CC1B54E004CAE05 /* redeem.png in Resources */ = {isa = PBXBuildFile; fileRef = 217D77091CC1B54E004CAE05 /* redeem.png */; };
@@ -38,6 +47,8 @@
 		217D77241CC1CD0B004CAE05 /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 217D77221CC1CD0B004CAE05 /* close@2x.png */; };
 		217D77281CC1CF64004CAE05 /* JBKenBurnsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 217D77271CC1CF64004CAE05 /* JBKenBurnsView.m */; };
 		217D772A1CC1D213004CAE05 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 217D77291CC1D213004CAE05 /* QuartzCore.framework */; };
+		2199B31E1CC4338C00A50B0F /* options_bgnd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2199B31C1CC4338C00A50B0F /* options_bgnd.png */; };
+		2199B31F1CC4338C00A50B0F /* options_bgnd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2199B31D1CC4338C00A50B0F /* options_bgnd@2x.png */; };
 		21B824881CBECA1100AAD520 /* meal.png in Resources */ = {isa = PBXBuildFile; fileRef = 21B824861CBECA1100AAD520 /* meal.png */; };
 		21B824891CBECA1100AAD520 /* meal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21B824871CBECA1100AAD520 /* meal@2x.png */; };
 		21B8248E1CBECB7600AAD520 /* meal.png in Resources */ = {isa = PBXBuildFile; fileRef = 21B8248A1CBECB7600AAD520 /* meal.png */; };
@@ -124,6 +135,22 @@
 		21012C501CBE2AA000566C05 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		21012C511CBE2AA000566C05 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		21012C521CBE2AA000566C05 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		212AD3311CC3FF3A00DCBD0B /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		212AD3341CC3FF5400DCBD0B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		212AD3371CC3FF6800DCBD0B /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		212AD3381CC3FF6800DCBD0B /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		212AD3391CC3FF6800DCBD0B /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		212AD33A1CC3FF6800DCBD0B /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		212AD33B1CC3FF6800DCBD0B /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		212AD33C1CC3FF6800DCBD0B /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		212AD33D1CC3FF6800DCBD0B /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		212AD33E1CC3FF6800DCBD0B /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		212AD33F1CC3FF6800DCBD0B /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		212AD3401CC3FF6800DCBD0B /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		212AD3471CC3FFD100DCBD0B /* DBClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBClass.h; sourceTree = "<group>"; };
+		212AD3481CC3FFD100DCBD0B /* DBClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBClass.m; sourceTree = "<group>"; };
+		212AD34A1CC3FFFD00DCBD0B /* DealsObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealsObj.h; sourceTree = "<group>"; };
+		212AD34B1CC3FFFD00DCBD0B /* DealsObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealsObj.m; sourceTree = "<group>"; };
 		213854211CBEA26F0086D163 /* DealViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealViewCell.h; sourceTree = "<group>"; };
 		213854221CBEA26F0086D163 /* DealViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealViewCell.m; sourceTree = "<group>"; };
 		213854231CBEA26F0086D163 /* DealViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealViewCell.xib; sourceTree = "<group>"; };
@@ -140,6 +167,8 @@
 		217D77261CC1CF64004CAE05 /* JBKenBurnsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBKenBurnsView.h; sourceTree = "<group>"; };
 		217D77271CC1CF64004CAE05 /* JBKenBurnsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBKenBurnsView.m; sourceTree = "<group>"; };
 		217D77291CC1D213004CAE05 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		2199B31C1CC4338C00A50B0F /* options_bgnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = options_bgnd.png; path = ../../../icons/options_bgnd.png; sourceTree = "<group>"; };
+		2199B31D1CC4338C00A50B0F /* options_bgnd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "options_bgnd@2x.png"; path = "../../../icons/options_bgnd@2x.png"; sourceTree = "<group>"; };
 		21B824861CBECA1100AAD520 /* meal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meal.png; sourceTree = "<group>"; };
 		21B824871CBECA1100AAD520 /* meal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "meal@2x.png"; sourceTree = "<group>"; };
 		21B8248A1CBECB7600AAD520 /* meal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meal.png; sourceTree = "<group>"; };
@@ -205,6 +234,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				212AD3351CC3FF5400DCBD0B /* libsqlite3.tbd in Frameworks */,
+				212AD3331CC3FF4800DCBD0B /* libsqlite3.0.tbd in Frameworks */,
 				217D772A1CC1D213004CAE05 /* QuartzCore.framework in Frameworks */,
 				21012C131CBE26B900566C05 /* ImageIO.framework in Frameworks */,
 				5E5A2D0014E0CD8D0042AE1E /* MapKit.framework in Frameworks */,
@@ -275,6 +306,35 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		212AD3361CC3FF6800DCBD0B /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				212AD3371CC3FF6800DCBD0B /* FMDatabase.h */,
+				212AD3381CC3FF6800DCBD0B /* FMDatabase.m */,
+				212AD3391CC3FF6800DCBD0B /* FMDatabaseAdditions.h */,
+				212AD33A1CC3FF6800DCBD0B /* FMDatabaseAdditions.m */,
+				212AD33B1CC3FF6800DCBD0B /* FMDatabasePool.h */,
+				212AD33C1CC3FF6800DCBD0B /* FMDatabasePool.m */,
+				212AD33D1CC3FF6800DCBD0B /* FMDatabaseQueue.h */,
+				212AD33E1CC3FF6800DCBD0B /* FMDatabaseQueue.m */,
+				212AD33F1CC3FF6800DCBD0B /* FMResultSet.h */,
+				212AD3401CC3FF6800DCBD0B /* FMResultSet.m */,
+			);
+			name = FMDB;
+			path = ../../../EOG/FMDB;
+			sourceTree = "<group>";
+		};
+		212AD3461CC3FFA500DCBD0B /* DB Classes */ = {
+			isa = PBXGroup;
+			children = (
+				212AD3471CC3FFD100DCBD0B /* DBClass.h */,
+				212AD3481CC3FFD100DCBD0B /* DBClass.m */,
+				212AD34A1CC3FFFD00DCBD0B /* DealsObj.h */,
+				212AD34B1CC3FFFD00DCBD0B /* DealsObj.m */,
+			);
+			name = "DB Classes";
+			sourceTree = "<group>";
+		};
 		217D77251CC1CF64004CAE05 /* KenBurns */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +347,8 @@
 		4E235CC3168F9C4900223C30 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2199B31C1CC4338C00A50B0F /* options_bgnd.png */,
+				2199B31D1CC4338C00A50B0F /* options_bgnd@2x.png */,
 				217D77211CC1CD0B004CAE05 /* close.png */,
 				217D77221CC1CD0B004CAE05 /* close@2x.png */,
 				217D771D1CC1CC5F004CAE05 /* list.png */,
@@ -378,6 +440,8 @@
 		5E605B9A14A081F900853025 = {
 			isa = PBXGroup;
 			children = (
+				212AD3461CC3FFA500DCBD0B /* DB Classes */,
+				212AD3361CC3FF6800DCBD0B /* FMDB */,
 				217D77251CC1CF64004CAE05 /* KenBurns */,
 				21012C311CBE2AA000566C05 /* SDWebImage */,
 				5E605BAF14A081F900853025 /* RevealControllerProject */,
@@ -398,6 +462,8 @@
 		5E605BA814A081F900853025 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				212AD3341CC3FF5400DCBD0B /* libsqlite3.tbd */,
+				212AD3311CC3FF3A00DCBD0B /* libsqlite3.0.tbd */,
 				217D77291CC1D213004CAE05 /* QuartzCore.framework */,
 				21012C121CBE26B900566C05 /* ImageIO.framework */,
 				5E5A2CFF14E0CD8D0042AE1E /* MapKit.framework */,
@@ -529,10 +595,12 @@
 				217D771F1CC1CC5F004CAE05 /* list.png in Resources */,
 				4ECAAF1716905677005862CE /* ipod.png in Resources */,
 				217D77181CC1C8CE004CAE05 /* share@2x.png in Resources */,
+				2199B31E1CC4338C00A50B0F /* options_bgnd.png in Resources */,
 				217D77171CC1C8CE004CAE05 /* share.png in Resources */,
 				213854251CBEA26F0086D163 /* DealViewCell.xib in Resources */,
 				21B824891CBECA1100AAD520 /* meal@2x.png in Resources */,
 				217D771B1CC1CB92004CAE05 /* fav.png in Resources */,
+				2199B31F1CC4338C00A50B0F /* options_bgnd@2x.png in Resources */,
 				4ECAAF1816905677005862CE /* ipod@2x.png in Resources */,
 				4ECAAF1B16905677005862CE /* skull.png in Resources */,
 				21B824881CBECA1100AAD520 /* meal.png in Resources */,
@@ -553,12 +621,14 @@
 			files = (
 				21012C611CBE2AA000566C05 /* UIImageView+WebCache.m in Sources */,
 				21012C5D1CBE2AA000566C05 /* UIImage+GIF.m in Sources */,
+				212AD3491CC3FFD100DCBD0B /* DBClass.m in Sources */,
 				21012C561CBE2AA000566C05 /* SDWebImageCompat.m in Sources */,
 				21012C5C1CBE2AA000566C05 /* UIButton+WebCache.m in Sources */,
 				21012C5E1CBE2AA000566C05 /* UIImage+MultiFormat.m in Sources */,
 				21012C5B1CBE2AA000566C05 /* SDWebImagePrefetcher.m in Sources */,
 				4EDE1D03168F0648005656D1 /* AppDelegate.m in Sources */,
 				21012C621CBE2AA000566C05 /* UIView+WebCacheOperation.m in Sources */,
+				212AD34C1CC3FFFD00DCBD0B /* DealsObj.m in Sources */,
 				21012C531CBE2AA000566C05 /* MKAnnotationView+WebCache.m in Sources */,
 				21012C5F1CBE2AA000566C05 /* UIImage+WebP.m in Sources */,
 				213854241CBEA26F0086D163 /* DealViewCell.m in Sources */,
@@ -566,6 +636,7 @@
 				21012C591CBE2AA000566C05 /* SDWebImageDownloaderOperation.m in Sources */,
 				21012C571CBE2AA000566C05 /* SDWebImageDecoder.m in Sources */,
 				4EDE1D11168F06E3005656D1 /* main.m in Sources */,
+				212AD3411CC3FF6800DCBD0B /* FMDatabase.m in Sources */,
 				21012C601CBE2AA000566C05 /* UIImageView+HighlightedWebCache.m in Sources */,
 				21012C541CBE2AA000566C05 /* NSData+ImageContentType.m in Sources */,
 				21012C581CBE2AA000566C05 /* SDWebImageDownloader.m in Sources */,
@@ -573,9 +644,13 @@
 				217D77281CC1CF64004CAE05 /* JBKenBurnsView.m in Sources */,
 				4ECAAF2416905A81005862CE /* FrontViewControllerLabel.m in Sources */,
 				4ECAAF2F16905DE9005862CE /* RearTableViewController.m in Sources */,
+				212AD3421CC3FF6800DCBD0B /* FMDatabaseAdditions.m in Sources */,
+				212AD3451CC3FF6800DCBD0B /* FMResultSet.m in Sources */,
 				21012C5A1CBE2AA000566C05 /* SDWebImageManager.m in Sources */,
+				212AD3431CC3FF6800DCBD0B /* FMDatabasePool.m in Sources */,
 				4E523227169088D200A13268 /* RearMasterTableViewController.m in Sources */,
 				21012C551CBE2AA000566C05 /* SDImageCache.m in Sources */,
+				212AD3441CC3FF6800DCBD0B /* FMDatabaseQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

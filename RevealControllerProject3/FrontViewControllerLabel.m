@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 
 
+
 @interface FrontViewControllerLabel ()
 {
     UIView *topBarView;
@@ -44,16 +45,23 @@
     int imgDetailPageXLoc;
     int imgDetailPageYLoc;
     
+    int viewBgTnCWidth, viewBgTnCHeight, viewBgTnCXLoc, viewBgTnCYLoc;
+    
     DealViewCell *dealViewCell;
     int numberOfDeals;
     NSArray *dealsArray;
+    NSArray *responseArray;
     
     UIImage *currentSelectedImage;
-    NSMutableDictionary *currentDeal;
+    DealsObj *currentDeal;
     NSMutableDictionary *restaurantAddress;
     SWRevealViewController *revealController;
     
     int lblMainTitleWidth, lblMainTitleHeight, lblMainTitleXLoc, lblMainTitleYLoc;
+    
+    UIColor *brownColor, *brownColorSubtle;
+    UIColor *orangeColor, *orangeColorSubtle;
+    UIColor *greenColor, *greenColorSubtle;
 }
 @end
 
@@ -68,11 +76,22 @@
 @synthesize viewBgAddress, viewBgTnC;
 @synthesize viewTopBar, btnCloseView, imgDetailPage;
 @synthesize imgClose, imgFavorite, imgShare, imgViewDetails;
-@synthesize kenView;
+@synthesize kenView, dbClassObj;
+@synthesize viewDisc1, lblDisc1;
+@synthesize viewDisc2, lblDisc2;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    brownColor = [UIColor colorWithRed:38/255.0f green:28/255.0f blue:22/255.0f alpha:1.0f];
+    brownColorSubtle  = [UIColor colorWithRed:38/255.0f green:28/255.0f blue:22/255.0f alpha:0.9f];
+    
+    greenColor = [UIColor colorWithRed:241/255.0f green:217/255.0f blue:193/255.0f alpha:1.0f];
+    greenColorSubtle = [UIColor colorWithRed:241/255.0f green:217/255.0f blue:193/255.0f alpha:0.9f];
+    
+    orangeColor = [UIColor colorWithRed:241/255.0f green:153/255.0f blue:6/255.0f alpha:1.0f];
+    orangeColorSubtle  = [UIColor colorWithRed:241/255.0f green:153/255.0f blue:6/255.0f alpha:0.9f];
     
     [self addTopBar];
     [self manageTableView];
@@ -141,8 +160,62 @@
                  NSJSONReadingMutableContainers error:&error];
 
     dealsArray = (NSArray *) response;
-    numberOfDeals = [dealsArray count];
     
+    DealsObj *currentDealObj;
+    for(id dealItemDict in dealsArray)
+    {
+        NSMutableDictionary *dealItem = (NSMutableDictionary *) dealItemDict;
+        currentDealObj = [[DealsObj alloc] init];
+        
+        currentDealObj.deal_alt1 = [NSString stringWithFormat:@"%@", [dealItem objectForKey:@"alt1"]];
+        currentDealObj.deal_alt3 = [dealItem objectForKey:@"alt2"];
+        currentDealObj.deal_alt3 = [dealItem objectForKey:@"alt3"];
+        currentDealObj.deal_brandId = [dealItem objectForKey:@"brandId"];
+        currentDealObj.deal_brandName = [dealItem objectForKey:@"brandName"];
+        currentDealObj.deal_couponTemplate = [dealItem objectForKey:@"couponTemplate"];
+        currentDealObj.deal_current_downloads = [dealItem objectForKey:@"current_downloads"];
+        currentDealObj.deal_dealsPerSubscriber = [dealItem objectForKey:@"dealsPerSubscriber"];
+        currentDealObj.deal_description = [dealItem objectForKey:@"description"];
+        currentDealObj.deal_disclaimer1 = [dealItem objectForKey:@"disclaimer1"];
+        currentDealObj.deal_disclaimer2 = [dealItem objectForKey:@"disclaimer2"];
+        currentDealObj.deal_draft = [dealItem objectForKey:@"draft"];
+        currentDealObj.deal_endDate = [dealItem objectForKey:@"deal_endDate"];
+        currentDealObj.deal_headline = [dealItem objectForKey:@"headline"];
+        currentDealObj.deal_id = [dealItem objectForKey:@"id"];
+        currentDealObj.deal_img1 = [dealItem objectForKey:@"img1"];
+        currentDealObj.deal_img1Id = [dealItem objectForKey:@"img1Id "];
+        currentDealObj.deal_img2 = [dealItem objectForKey:@"img2 "];
+        currentDealObj.deal_img2Id = [dealItem objectForKey:@"img2Id"];
+        currentDealObj.deal_img3Id = [dealItem objectForKey:@"img3Id"];
+        currentDealObj.deal_link = [dealItem objectForKey:@"link"];
+        currentDealObj.deal_messageId = [dealItem objectForKey:@"messageId"];
+        
+        currentDealObj.deal_startDate = [dealItem objectForKey:@"startDate"];
+        currentDealObj.deal_subheadline = [dealItem objectForKey:@"subheadline"];
+        currentDealObj.deal_template = [dealItem objectForKey:@"template"];
+        currentDealObj.deal_totalDownloadLimit = [dealItem objectForKey:@"totalDownloadLimit"];
+        
+        NSMutableArray *addressDict = (NSMutableArray *)  [dealItem objectForKey:@"restaurants"];
+        if(addressDict.count > 0)
+        {
+            NSMutableArray *addDict = (NSMutableArray *) addressDict[0];
+            NSMutableDictionary *address = (NSMutableDictionary *) addDict[0];
+            
+            currentDealObj.deal_restaurants_address = [address objectForKey:@"address"];
+            currentDealObj.deal_restaurants_brandId = [address objectForKey:@"brandId"];
+            currentDealObj.deal_restaurants_city = [address objectForKey:@"city"];
+            currentDealObj.deal_restaurants_hours = [address objectForKey:@"hours"];
+            currentDealObj.deal_restaurants_id = [address objectForKey:@"id"];
+            currentDealObj.deal_restaurants_phone = [address objectForKey:@"phone"];
+            currentDealObj.deal_restaurants_state = [address objectForKey:@"state"];
+            currentDealObj.deal_restaurants_zipcode = [address objectForKey:@"zipcode"];
+        }
+        
+        [dbClassObj InsertNewDeal: currentDealObj];
+    }
+    
+    responseArray = [dbClassObj GetDealsArray];
+    numberOfDeals = [responseArray count];
     
     if([responseCode statusCode] != 200)
     {
@@ -186,23 +259,24 @@
         cell = [nib objectAtIndex:0];
     }
     
-    NSString *dealHeadline = [dealsArray[indexPath.row] objectForKey:@"headline"];
-    NSString *dealRestaurant = [dealsArray[indexPath.row] objectForKey:@"brandName"];
-    NSString *dealLocation = [dealsArray[indexPath.row] objectForKey:@"brandName"];
-    NSString *dealImage = [dealsArray[indexPath.row] objectForKey:@"img1"];
-
-    NSMutableArray* res = (NSMutableArray *) [dealsArray[indexPath.row] objectForKey:@"restaurants"];
-    
-    if(res != nil && res.count > 0)
-    {
-        NSMutableArray* obj = (NSMutableArray*) res[0];
-        
-        if(obj != nil && obj.count > 0)
-        {
-            NSMutableDictionary* obj2 = (NSMutableDictionary*) obj[0];
-            dealLocation = [obj2 objectForKey:@"address"];
-        }
-    }
+    DealsObj *currentDealObj = (DealsObj *) responseArray[indexPath.row];
+    NSString *dealHeadline = currentDealObj.deal_headline;
+    NSString *dealRestaurant = currentDealObj.deal_brandName;
+    NSString *dealLocation = currentDealObj.deal_restaurants_address;
+    NSString *dealImage = currentDealObj.deal_img1;
+   
+//    NSMutableArray* res = (NSMutableArray *) [dealsArray[indexPath.row] objectForKey:@"restaurants"];
+//    
+//    if(res != nil && res.count > 0)
+//    {
+//        NSMutableArray* obj = (NSMutableArray*) res[0];
+//        
+//        if(obj != nil && obj.count > 0)
+//        {
+//            NSMutableDictionary* obj2 = (NSMutableDictionary*) obj[0];
+//            
+//        }
+//    }
     
     [cell setDealDetails:dealHeadline :dealRestaurant : dealLocation];
     [cell setDealImage: dealImage ];
@@ -226,16 +300,18 @@
 {
     DealViewCell *cell = (DealViewCell *) [tableView cellForRowAtIndexPath:indexPath];
     currentSelectedImage = cell.img.image;
-    currentDeal = (NSMutableDictionary *) [dealsArray objectAtIndex: indexPath.row];
     
-    NSMutableArray *addressDict = (NSMutableArray *)  [currentDeal objectForKey:@"restaurants"];
-    if(addressDict.count > 0)
-    {
-        NSMutableArray *addDict = (NSMutableArray *) addressDict[0];
-        restaurantAddress = (NSMutableDictionary *) addDict[0];
-//        NSLog(@"%@", restaurantAddress);
-    }
-    NSLog(@"Current Log %@", currentDeal);
+    currentDeal = (DealsObj *) responseArray[indexPath.row];
+    //restaurantAddress = currentDealObj.deal_restaurants_address;
+    
+//    NSMutableArray *addressDict = (NSMutableArray *)  [currentDeal objectForKey:@"restaurants"];
+//    if(addressDict.count > 0)
+//    {
+//        NSMutableArray *addDict = (NSMutableArray *) addressDict[0];
+//        restaurantAddress = (NSMutableDictionary *) addDict[0];
+////        NSLog(@"%@", restaurantAddress);
+//    }
+//    NSLog(@"Current Log %@", currentDeal);
     
     [revealController rightRevealToggle:cell];
     
@@ -244,48 +320,31 @@
 
 - (void) showDetailsPage
 {
-    [bgView setContentOffset:
-     CGPointMake(0, -bgView.contentInset.top) animated:YES];
+    [bgView setContentOffset: CGPointMake(0, -bgView.contentInset.top) animated:YES];
     
-    //imgBranding.backgroundColor = [UIColor colorWithRed:38/255.0f green:28/255.0f blue:22/255.0f alpha:1.0f];
-    //imgBranding.backgroundColor = [UIColor lightGrayColor];
-     viewTopBar.backgroundColor =  [UIColor colorWithRed:38/255.0f green:28/255.0f blue:22/255.0f alpha:1.0f];
-    
-    //bgView.backgroundColor = [UIColor colorWithRed:38/255.0f green:28/255.0f blue:22/255.0f alpha:1.0f];
-    bgView.backgroundColor = [UIColor whiteColor];
+    viewTopBar.backgroundColor =  orangeColorSubtle;
+    bgView.backgroundColor = greenColorSubtle;
 
-    
-    viewBgTitle.backgroundColor = [UIColor colorWithRed:79/255.0f green:170/255.0f blue:178/255.0f alpha:1.0f];
+    viewBgTitle.backgroundColor = brownColor;
     [lblMainTitle setTextColor:  [UIColor whiteColor]];
-     //[UIColor colorWithRed:241/255.0f green:217/255.0f blue:193/255.0f alpha:1.0f]]
     
-    viewBgSubHeading.backgroundColor = [UIColor colorWithRed:79/255.0f green:170/255.0f blue:178/255.0f alpha:0.90f];
+    viewBgSubHeading.backgroundColor = brownColorSubtle;
     [lblValidThru setTextColor: [UIColor whiteColor]];
-    //[UIColor colorWithRed:241/255.0f green:217/255.0f blue:193/255.0f alpha:1.0f]
     
-    //[UIColor colorWithRed:167/255.0f green:127/255.0f blue:93/255.0f alpha:1.0f];
-    viewBgBrandName.backgroundColor = [UIColor colorWithRed:241/255.0f green:153/255.0f blue:6/255.0f alpha:1.0f];
-    //[UIColor colorWithRed:241/255.0f green:217/255.0f blue:193/255.0f alpha:1.0f];
+    viewBgBrandName.backgroundColor = orangeColor;
     [lblBrandName setTextColor: [UIColor whiteColor]];
-     //[UIColor colorWithRed:38/255.0f green:28/255.0f blue:22/255.0f alpha:1.0f]];
 
-    viewBgAddress.backgroundColor = [UIColor colorWithRed:241/255.0f green:153/255.0f blue:6/255.0f alpha: 0.90f];
+    viewBgAddress.backgroundColor = orangeColorSubtle;
     [lblAddress setTextColor: [UIColor whiteColor]];
-    //[UIColor colorWithRed:38/255.0f green:28/255.0f blue:22/255.0f alpha:1.0f]];
-     
-    
-    //[UIColor colorWithRed:241/255.0f green:153/255.0f blue:6/255.0f alpha:1.0f];
     
     viewImgCover.backgroundColor = [UIColor colorWithRed:0/255.0f green:0/255.0f blue:0/255.0f alpha:0.45f];
     imgRedeemNow.backgroundColor = [UIColor clearColor];
-    //[UIColor colorWithRed:241/255.0f green:153/255.0f blue:6/255.0f alpha:1.0f];
-
-    [lblCouponNumber setTextColor: [UIColor whiteColor]];
-    viewBgTnC.backgroundColor = [UIColor colorWithRed:79/255.0f green:170/255.0f blue:178/255.0f alpha:1.0f];
-    //;
     
-    //[imgDetailPage setHidden: YES];
-
+    [lblCouponNumber setTextColor: [UIColor whiteColor]];
+    
+    viewDisc1.backgroundColor = orangeColorSubtle;
+    viewDisc2.backgroundColor = orangeColorSubtle;
+    
     imgRedeemNow.image = [UIImage imageNamed:@"redeem.png"];
     imgClose.image = [UIImage imageNamed:@"close.png"];
     imgFavorite.image = [UIImage imageNamed:@"fav.png"];
@@ -293,7 +352,6 @@
     imgShare.contentMode = UIViewContentModeScaleAspectFill;
     imgShare.image = [UIImage imageNamed:@"share.png"];
     imgViewDetails.image = [UIImage imageNamed:@"list.png"];
-    //imgClose, imgFavorite, imgShare, imgViewDetails
     
     UITapGestureRecognizer *shareTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showShareOptions)];
     shareTap.numberOfTapsRequired = 1;
@@ -307,7 +365,7 @@
     
     viewDetailsPage.frame = CGRectMake(viewDetailsPageXLoc, viewDetailsPageYLoc, viewDetailsPageWidth, viewDetailsPageHeight);
     bgView.frame = CGRectMake(viewDetailsPageXLoc, 0, viewDetailsPageWidth, viewDetailsPageHeight);
-    bgView.contentSize = CGSizeMake(viewDetailsPageWidth,  (viewBgTnC.frame.origin.y + viewBgTnC.frame.size.height + 20));
+    bgView.contentSize = CGSizeMake(viewDetailsPageWidth,  (viewDisc2.frame.origin.y + viewDisc2.frame.size.height + 60));
     
     //imgBranding.frame = CGRectMake(0, 0, viewDetailsPageWidth, 50);
     
@@ -317,23 +375,43 @@
     lblMainTitleYLoc = lblMainTitle.frame.origin.y;
     
     lblMainTitle.frame = CGRectMake(lblMainTitleXLoc, lblMainTitleYLoc, lblMainTitleWidth, lblMainTitleHeight);
-    lblMainTitle.text = [currentDeal objectForKey:@"headline"];
+    lblMainTitle.text = currentDeal.deal_headline;
     
-    //[lblMainTitle setBackgroundColor: [UIColor colorWithRed:241/255.0f green:153/255.0f blue:6/255.0f alpha:1.0f]];
+    lblDisc1.text = currentDeal.deal_disclaimer1;
+    [lblDisc1 setTextColor: [UIColor whiteColor]];
+    lblDisc2.text = currentDeal.deal_disclaimer2;
+    [lblDisc2 setTextColor: [UIColor whiteColor]];
     
     imgDetailPageWidth = imgDetailPage.frame.size.width;
     imgDetailPageHeight = imgDetailPage.frame.size.height;
     imgDetailPageXLoc = imgDetailPage.frame.origin.x;
     imgDetailPageYLoc = lblMainTitleYLoc +  lblMainTitleHeight + 5;
     
+    viewBgTnCWidth = viewBgTnC.frame.size.width;
+    viewBgTnCHeight = viewBgTnC.frame.size.height;
+    viewBgTnCXLoc = ([UIScreen mainScreen].bounds.size.width - viewBgTnCWidth)/2;
+    viewBgTnCYLoc = [UIScreen mainScreen].bounds.size.height - viewBgTnCHeight - 25;
+    
+    viewBgTnC.frame = CGRectMake(viewBgTnCXLoc, viewBgTnCYLoc, viewBgTnCWidth, viewBgTnCHeight);
+    viewBgTnC.backgroundColor = [UIColor clearColor];
+    
+    UIImageView *optionsBgImage = [[UIImageView alloc] init];
+    optionsBgImage.frame = CGRectMake(0, 0, viewBgTnCWidth, viewBgTnCHeight);
+    [optionsBgImage setImage:[UIImage imageNamed:@"options_bgnd.png"]];
+    [optionsBgImage setAlpha:0.8f];
+    
+    [viewBgTnC addSubview: optionsBgImage];
+    [viewBgTnC sendSubviewToBack: optionsBgImage];
+    
     //[imgDetailPage setImage: currentSelectedImage];
     
     NSArray *myImages = @[currentSelectedImage];
     
+    [kenView reloadInputViews];
     [kenView animateWithImages:myImages
                  transitionDuration:6
                        initialDelay:0
-                               loop:YES
+                               loop:NO
                         isLandscape:YES];
     
     imgDetailPage.contentMode = UIViewContentModeScaleAspectFill;
@@ -346,22 +424,18 @@
     
     NSMutableString *couponNumber = [[NSMutableString alloc] init];
     [couponNumber appendString: @"Coupon\n#"];
-    [couponNumber appendString: [NSString stringWithFormat:@"%@", [restaurantAddress objectForKey:@"id"]]];
+    [couponNumber appendString: currentDeal.deal_id];
     [lblCouponNumber setText: couponNumber];
     
     NSMutableString *address = [[NSMutableString alloc] init];
-    [address appendString: [NSString stringWithFormat:@"%@", [restaurantAddress objectForKey:@"address"]]];
-    [address appendString: [NSString stringWithFormat:@" %@", [restaurantAddress objectForKey:@"city"]]];
-    [address appendString: [NSString stringWithFormat:@" %@", [restaurantAddress objectForKey:@"state"]]];
-    [address appendString: [NSString stringWithFormat:@" %@", [restaurantAddress objectForKey:@"zipcode"]]];
-    [address appendString: [NSString stringWithFormat:@" %@", [restaurantAddress objectForKey:@"phone"]]];
+    [address appendString: [NSString stringWithFormat:@"%@", currentDeal.deal_restaurants_address]];
+    [address appendString: [NSString stringWithFormat:@" %@", currentDeal.deal_restaurants_city]];
+    [address appendString: [NSString stringWithFormat:@" %@", currentDeal.deal_restaurants_state]];
+    [address appendString: [NSString stringWithFormat:@" %@", currentDeal.deal_restaurants_zipcode]];
+    [address appendString: [NSString stringWithFormat:@" %@", currentDeal.deal_restaurants_phone]];
     
-    lblValidThru.text =  [currentDeal objectForKey:@"subheadline"];
-    
-    
-    lblBrandName.text = [currentDeal objectForKey:@"brandName"];
-    
-    
+    lblValidThru.text =  currentDeal.deal_subheadline;
+    lblBrandName.text = currentDeal.deal_brandName;
     lblAddress.text = address;
     
     
@@ -422,8 +496,8 @@
 
 - (void) showShareOptions
 {
-    NSString * message = [NSString stringWithFormat:@"%@", [currentDeal objectForKey:@"headline"]];
-    NSString * messageURL = [NSString stringWithFormat:@"%@", [currentDeal objectForKey:@"link"]];
+    NSString * message = currentDeal.deal_headline;
+    NSString * messageURL = currentDeal.deal_link;
     
     
     NSArray * shareItems = @[message, messageURL];

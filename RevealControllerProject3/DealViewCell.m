@@ -12,6 +12,7 @@
 @implementation DealViewCell
 @synthesize img, lblDealName, lblDealDescription, lblRestaurant;
 @synthesize viewTopSection, viewTopSubSection, viewImgBottomSection;
+@synthesize dealsObj;
 
 - (void)awakeFromNib {
     // Initialization code

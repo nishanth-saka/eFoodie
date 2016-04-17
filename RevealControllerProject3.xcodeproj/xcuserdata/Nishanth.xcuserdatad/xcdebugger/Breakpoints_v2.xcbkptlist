@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevealControllerProject3/FrontViewControllerLabel.m"
-            timestampString = "482470221.564322"
+            timestampString = "482623413.690184"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
-            landmarkName = "-hideDetailsPage"
+            startingLineNumber = "439"
+            endingLineNumber = "439"
+            landmarkName = "-showDetailsPage"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

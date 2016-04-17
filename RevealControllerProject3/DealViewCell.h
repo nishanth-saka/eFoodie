@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DealsObj.h"
 
 @interface DealViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *img;
@@ -16,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIView *viewTopSection;
 @property (weak, nonatomic) IBOutlet UIView *viewTopSubSection;
 @property (weak, nonatomic) IBOutlet UIView *viewImgBottomSection;
+
+@property (strong, nonatomic) DealsObj *dealsObj;
 
 - (void) setDealImage : (NSString *) ImageURL;
 - (void) setDealDetails: (NSString *) dealTitle : (NSString *) dealRestaurant : (NSString *) dealLocation;

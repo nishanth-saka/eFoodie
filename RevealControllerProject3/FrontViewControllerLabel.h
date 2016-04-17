@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "DealViewCell.h"
 #import "JBKenBurnsView.h"
+#import "DBClass.h"
+#import "DealsObj.h"
 
 @interface FrontViewControllerLabel : UIViewController <UITableViewDataSource, UITableViewDelegate, KenBurnsViewDelegate>
 
@@ -39,6 +41,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgFavorite;
 @property (weak, nonatomic) IBOutlet UIImageView *imgViewDetails;
 @property (weak, nonatomic) IBOutlet UIImageView *imgClose;
+
+@property (weak, nonatomic) IBOutlet UIView *viewDisc1;
+@property (weak, nonatomic) IBOutlet UILabel *lblDisc1;
+@property (weak, nonatomic) IBOutlet UIView *viewDisc2;
+@property (weak, nonatomic) IBOutlet UILabel *lblDisc2;
+
+@property (strong, nonatomic) DBClass *dbClassObj;
 
 @property (nonatomic) NSString *text;
 @end
